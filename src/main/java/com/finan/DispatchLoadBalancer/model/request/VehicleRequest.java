@@ -6,6 +6,13 @@ import java.util.List;
 public class VehicleRequest {
     private List<VehicleDTO> vehicles;
 
+    public VehicleRequest() {
+    }
+
+    public VehicleRequest(List<VehicleDTO> vehicles) {
+        this.vehicles = vehicles;
+    }
+
     public List<VehicleDTO> getVehicles() {
         return vehicles;
     }
