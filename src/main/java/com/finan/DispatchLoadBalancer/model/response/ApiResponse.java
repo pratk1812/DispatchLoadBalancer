@@ -6,8 +6,7 @@ public class ApiResponse {
   private String message;
   private String status;
 
-  public ApiResponse() {
-  }
+  public ApiResponse() {}
 
   public ApiResponse(String message) {
     this.message = message;
@@ -37,9 +36,6 @@ public class ApiResponse {
 
   @Override
   public String toString() {
-    return "ApiResponse{" +
-            "message='" + message + '\'' +
-            ", status='" + status + '\'' +
-            '}';
+    return "ApiResponse{" + "message='" + message + '\'' + ", status='" + status + '\'' + '}';
   }
 }

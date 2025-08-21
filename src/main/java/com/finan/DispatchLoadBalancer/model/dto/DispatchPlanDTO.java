@@ -3,50 +3,58 @@ package com.finan.DispatchLoadBalancer.model.dto;
 import java.util.List;
 
 public class DispatchPlanDTO {
-    private String vehicleId;
-    private int totalLoad;
-    private String totalDistance;
-    private List<OrderDTO> assignedOrders;
+  private String vehicleId;
+  private int totalLoad;
+  private String totalDistance;
+  private List<OrderDTO> assignedOrders;
 
-    public String getVehicleId() {
-        return vehicleId;
-    }
+  public DispatchPlanDTO() {}
 
-    public void setVehicleId(String vehicleId) {
-        this.vehicleId = vehicleId;
-    }
+  public String getVehicleId() {
+    return vehicleId;
+  }
 
-    public int getTotalLoad() {
-        return totalLoad;
-    }
+  public void setVehicleId(String vehicleId) {
+    this.vehicleId = vehicleId;
+  }
 
-    public void setTotalLoad(int totalLoad) {
-        this.totalLoad = totalLoad;
-    }
+  public int getTotalLoad() {
+    return totalLoad;
+  }
 
-    public String getTotalDistance() {
-        return totalDistance;
-    }
+  public void setTotalLoad(int totalLoad) {
+    this.totalLoad = totalLoad;
+  }
 
-    public void setTotalDistance(String totalDistance) {
-        this.totalDistance = totalDistance;
-    }
+  public String getTotalDistance() {
+    return totalDistance;
+  }
 
-    public List<OrderDTO> getAssignedOrders() {
-        return assignedOrders;
-    }
+  public void setTotalDistance(String totalDistance) {
+    this.totalDistance = totalDistance;
+  }
 
-    public void setAssignedOrders(List<OrderDTO> assignedOrders) {
-        this.assignedOrders = assignedOrders;
-    }
+  public List<OrderDTO> getAssignedOrders() {
+    return assignedOrders;
+  }
 
-    @Override
-    public String toString() {
-        return "DispatchPlan{" +
-                "vehicleId='" + vehicleId + '\'' +
-                ", totalLoad=" + totalLoad +
-                ", totalDistance='" + totalDistance + '\'' +
-                ", assignedOrders=" + assignedOrders +
-                '}';
-    }
+  public void setAssignedOrders(List<OrderDTO> assignedOrders) {
+    this.assignedOrders = assignedOrders;
+  }
+
+  @Override
+  public String toString() {
+    return "DispatchPlan{"
+        + "vehicleId='"
+        + vehicleId
+        + '\''
+        + ", totalLoad="
+        + totalLoad
+        + ", totalDistance='"
+        + totalDistance
+        + '\''
+        + ", assignedOrders="
+        + assignedOrders
+        + '}';
+  }
 }

@@ -9,7 +9,8 @@ import com.finan.DispatchLoadBalancer.model.request.OrderRequest;
 import com.finan.DispatchLoadBalancer.model.request.VehicleRequest;
 import com.finan.DispatchLoadBalancer.model.response.ApiResponse;
 import com.finan.DispatchLoadBalancer.model.response.DispatchPlanResponse;
-import com.finan.DispatchLoadBalancer.service.DispatchLoadBalancerService;
+import com.finan.DispatchLoadBalancer.service.DispatchPlanService;
+import com.finan.DispatchLoadBalancer.service.VehicleOrderService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +34,9 @@ import static org.mockito.Mockito.when;
 class DispatchLoadBalancerControllerTest {
 
     @Mock
-    private DispatchLoadBalancerService dispatchLoadBalancerService;
+    private VehicleOrderService vehicleOrderService;
+    @Mock
+    private DispatchPlanService dispatchPlanService;
     @InjectMocks
     private DispatchLoadBalancerController dispatchLoadBalancerController;
 
@@ -44,7 +47,7 @@ class DispatchLoadBalancerControllerTest {
         OrderDTO order2 = new OrderDTO();
         OrderRequest request = new OrderRequest(List.of(order1, order2));
 
-        doNothing().when(dispatchLoadBalancerService).saveOrders(anyList());
+        doNothing().when(vehicleOrderService).saveOrders(anyList());
 
         ResponseEntity<ApiResponse> response = dispatchLoadBalancerController.saveOrders(request);
 
@@ -72,7 +75,7 @@ class DispatchLoadBalancerControllerTest {
         VehicleRequest request = new VehicleRequest(List.of(vehicle1, vehicle2));
 
 
-        doNothing().when(dispatchLoadBalancerService).saveVehicles(anyList());
+        doNothing().when(vehicleOrderService).saveVehicles(anyList());
 
         ResponseEntity<ApiResponse> response = dispatchLoadBalancerController.saveVehicles(request);
 
@@ -98,11 +101,11 @@ class DispatchLoadBalancerControllerTest {
     @Test
     @DisplayName("DispatchPlanDTO plan should be returned")
     void getPlan_shouldReturnDispatchPlanResponse() throws Exception {
-        DispatchPlanDTO plan1 = new DispatchPlanDTO(/* sample data */);
-        DispatchPlanDTO plan2 = new DispatchPlanDTO(/* sample data */);
+        DispatchPlanDTO plan1 = new DispatchPlanDTO();
+        DispatchPlanDTO plan2 = new DispatchPlanDTO();
         List<DispatchPlanDTO> plans = List.of(plan1, plan2);
 
-        when(dispatchLoadBalancerService.getPlan()).thenReturn(plans);
+        when(dispatchPlanService.assign()).thenReturn(plans);
 
         ResponseEntity<DispatchPlanResponse> response = dispatchLoadBalancerController.getPlan();
         assertNotNull(response, "Response should not be null");

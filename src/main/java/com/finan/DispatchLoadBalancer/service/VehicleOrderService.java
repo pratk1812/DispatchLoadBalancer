@@ -1,6 +1,5 @@
 package com.finan.DispatchLoadBalancer.service;
 
-import com.finan.DispatchLoadBalancer.model.dto.DispatchPlanDTO;
 import com.finan.DispatchLoadBalancer.model.dto.OrderDTO;
 import com.finan.DispatchLoadBalancer.model.dto.VehicleDTO;
 import com.finan.DispatchLoadBalancer.persistence.enitity.OrderEntity;
@@ -17,19 +16,18 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 /**
- * Service responsible for persisting dispatch-related data such as orders and vehicles.
- * Acts as a bridge between DTOs received from external layers and entities stored in the database.
- * <p>
- * This service uses mappers to convert DTOs to entities and repositories to persist them.
- * It is typically invoked during dispatch initialization or bulk data ingestion.
- * </p>
+ * Service responsible for persisting dispatch-related data such as orders and vehicles. Acts as a
+ * bridge between DTOs received from external layers and entities stored in the database.
+ *
+ * <p>This service uses mappers to convert DTOs to entities and repositories to persist them. It is
+ * typically invoked during dispatch initialization or bulk data ingestion.
  *
  * @author Pratyush
  */
 @Service
-public class DispatchLoadBalancerService {
+public class VehicleOrderService {
 
-  private static final Logger LOGGER = LogManager.getLogger(DispatchLoadBalancerService.class);
+  private static final Logger LOGGER = LogManager.getLogger(VehicleOrderService.class);
 
   private final OrderRepository orderRepository;
   private final VehicleRepository vehicleRepository;
@@ -39,17 +37,17 @@ public class DispatchLoadBalancerService {
   /**
    * Constructs a new {@code DispatchLoadBalancerService} with required dependencies.
    *
-   * @param orderRepository   Repository for persisting order entities.
+   * @param orderRepository Repository for persisting order entities.
    * @param vehicleRepository Repository for persisting vehicle entities.
-   * @param orderMapper       Mapper to convert {@code OrderDTO} to {@code OrderEntity}.
-   * @param vehicleMapper     Mapper to convert {@code VehicleDTO} to {@code VehicleEntity}.
+   * @param orderMapper Mapper to convert {@code OrderDTO} to {@code OrderEntity}.
+   * @param vehicleMapper Mapper to convert {@code VehicleDTO} to {@code VehicleEntity}.
    */
   @Autowired
-  public DispatchLoadBalancerService(
-          OrderRepository orderRepository,
-          VehicleRepository vehicleRepository,
-          OrderMapper orderMapper,
-          VehicleMapper vehicleMapper) {
+  public VehicleOrderService(
+      OrderRepository orderRepository,
+      VehicleRepository vehicleRepository,
+      OrderMapper orderMapper,
+      VehicleMapper vehicleMapper) {
     this.orderRepository = orderRepository;
     this.vehicleRepository = vehicleRepository;
     this.orderMapper = orderMapper;
@@ -63,9 +61,7 @@ public class DispatchLoadBalancerService {
    */
   public void saveOrders(@NonNull List<OrderDTO> orderDTOS) {
     LOGGER.info("Received {} orders for persistence.", orderDTOS.size());
-    List<OrderEntity> orderEntities = orderDTOS.stream()
-            .map(orderMapper::toEntity)
-            .toList();
+    List<OrderEntity> orderEntities = orderDTOS.stream().map(orderMapper::toEntity).toList();
     orderRepository.saveAll(orderEntities);
     LOGGER.debug("Successfully saved {} order entities.", orderEntities.size());
   }
@@ -77,22 +73,9 @@ public class DispatchLoadBalancerService {
    */
   public void saveVehicles(@NonNull List<VehicleDTO> vehicleDTOS) {
     LOGGER.info("Received {} vehicles for persistence.", vehicleDTOS.size());
-    List<VehicleEntity> vehicleEntities = vehicleDTOS.stream()
-            .map(vehicleMapper::toEntity)
-            .toList();
+    List<VehicleEntity> vehicleEntities =
+        vehicleDTOS.stream().map(vehicleMapper::toEntity).toList();
     vehicleRepository.saveAll(vehicleEntities);
     LOGGER.debug("Successfully saved {} vehicle entities.", vehicleEntities.size());
   }
-
-
-  public List<DispatchPlanDTO> getPlan() {
-    // Fetch Orders
-
-    // Fetch Vehicles
-
-    // calculate dispatch plan
-    return null;
-  }
 }
-
-

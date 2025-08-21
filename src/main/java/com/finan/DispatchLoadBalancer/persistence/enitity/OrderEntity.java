@@ -98,7 +98,12 @@ public class OrderEntity {
   public final boolean equals(Object o) {
     if (!(o instanceof OrderEntity that)) return false;
 
-    return Double.compare(latitude, that.latitude) == 0 && Double.compare(longitude, that.longitude) == 0 && packageWeight == that.packageWeight && id.equals(that.id) && orderId.equals(that.orderId) && priority == that.priority;
+    return Double.compare(latitude, that.latitude) == 0
+        && Double.compare(longitude, that.longitude) == 0
+        && packageWeight == that.packageWeight
+        && id.equals(that.id)
+        && orderId.equals(that.orderId)
+        && priority == that.priority;
   }
 
   @Override
@@ -114,14 +119,23 @@ public class OrderEntity {
 
   @Override
   public String toString() {
-    return "OrderEntity{" +
-            "id=" + id +
-            ", orderId='" + orderId + '\'' +
-            ", latitude=" + latitude +
-            ", longitude=" + longitude +
-            ", address='" + address + '\'' +
-            ", packageWeight=" + packageWeight +
-            ", priority=" + priority +
-            '}';
+    return "OrderEntity{"
+        + "id="
+        + id
+        + ", orderId='"
+        + orderId
+        + '\''
+        + ", latitude="
+        + latitude
+        + ", longitude="
+        + longitude
+        + ", address='"
+        + address
+        + '\''
+        + ", packageWeight="
+        + packageWeight
+        + ", priority="
+        + priority
+        + '}';
   }
 }

@@ -57,6 +57,18 @@ public class VehicleDTO {
   }
 
   @Override
+  public final boolean equals(Object o) {
+    if (!(o instanceof VehicleDTO that)) return false;
+
+    return vehicleId.equals(that.vehicleId);
+  }
+
+  @Override
+  public int hashCode() {
+    return vehicleId.hashCode();
+  }
+
+  @Override
   public String toString() {
     return "VehicleDTO{"
         + "id="

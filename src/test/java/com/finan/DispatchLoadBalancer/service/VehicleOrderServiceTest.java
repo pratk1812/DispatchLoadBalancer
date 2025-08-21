@@ -17,7 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.never;
@@ -26,7 +25,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class DispatchLoadBalancerServiceTest {
+class VehicleOrderServiceTest {
 
     @Mock
     private OrderRepository orderRepository;
@@ -37,7 +36,7 @@ class DispatchLoadBalancerServiceTest {
     @Mock
     private VehicleMapper vehicleMapper;
     @InjectMocks
-    private DispatchLoadBalancerService dispatchLoadBalancerService;
+    private VehicleOrderService vehicleOrderService;
 
     @Test
     @DisplayName("Should map OrderDTOs to OrderEntities and persist them")
@@ -55,7 +54,7 @@ class DispatchLoadBalancerServiceTest {
         when(orderMapper.toEntity(dto2)).thenReturn(entity2);
 
         // Act
-        dispatchLoadBalancerService.saveOrders(dtoList);
+        vehicleOrderService.saveOrders(dtoList);
 
         // Assert
         verify(orderMapper, times(1)).toEntity(dto1);
@@ -70,7 +69,7 @@ class DispatchLoadBalancerServiceTest {
         List<OrderDTO> emptyList = List.of();
 
         // Act
-        dispatchLoadBalancerService.saveOrders(emptyList);
+        vehicleOrderService.saveOrders(emptyList);
 
         // Assert
         verify(orderMapper, never()).toEntity(any());
@@ -94,7 +93,7 @@ class DispatchLoadBalancerServiceTest {
         when(vehicleMapper.toEntity(dto2)).thenReturn(entity2);
 
         // Act
-        dispatchLoadBalancerService.saveVehicles(dtoList);
+        vehicleOrderService.saveVehicles(dtoList);
 
         // Assert
         verify(vehicleMapper, times(1)).toEntity(dto1);
@@ -109,7 +108,7 @@ class DispatchLoadBalancerServiceTest {
         List<VehicleDTO> emptyList = List.of();
 
         // Act
-        dispatchLoadBalancerService.saveVehicles(emptyList);
+        vehicleOrderService.saveVehicles(emptyList);
 
         // Assert
         verify(vehicleMapper, never()).toEntity(any());

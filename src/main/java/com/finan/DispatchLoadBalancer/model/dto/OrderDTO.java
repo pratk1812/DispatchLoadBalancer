@@ -68,6 +68,18 @@ public class OrderDTO {
   }
 
   @Override
+  public final boolean equals(Object o) {
+    if (!(o instanceof OrderDTO orderDTO)) return false;
+
+    return orderId.equals(orderDTO.orderId);
+  }
+
+  @Override
+  public int hashCode() {
+    return orderId.hashCode();
+  }
+
+  @Override
   public String toString() {
     return "OrderDTO{"
         + "id="
